@@ -38,7 +38,7 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 
 	if (FAILED(hr))
 	{
-		std::cout << "ERROR1";
+		std::cout << "Error: SwapChain1\n";
 		return false;
 	}
 
@@ -47,7 +47,7 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 
 	if (FAILED(hr))
 	{
-		std::cout << "ERROR2";
+		std::cout << "Error: SwapChain2\n";
 		return false;
 	}
 

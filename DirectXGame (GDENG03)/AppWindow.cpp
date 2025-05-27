@@ -1,4 +1,5 @@
 #include "AppWindow.h"
+#include <Windows.h>
 
 struct vec3
 {
@@ -8,7 +9,15 @@ struct vec3
 struct vertex
 {
 	vec3 position;
+	vec3 position1;
 	vec3 color;
+	vec3 color1;
+};
+
+__declspec(align(16))
+struct constant
+{
+	float m_angle;
 };
 
 AppWindow::AppWindow()
@@ -28,23 +37,33 @@ void AppWindow::onCreate()
 	//for drawing a triangle
 	vertex list[] = 
 	{//    X     Y     Z
-		{ 0.0f, 0.5f, 0.0f },
-		{ 0.5f, -0.5f, 0.0f },
-		{ -0.5f, -0.5f, 0.0f }, 
+		//Rainbow
+     	{ -0.5f, -0.5f, 0.0f, -0.32f, -0.11f, 0.0f ,1,0,0,  1,0,1 },
+		{ -0.5f, 0.5f, 0.0f,  -0.11f, 0.78f, 0.0f, 0,1,0,   0.5,0.5,1 },
+		{ 0.5f, -0.5f, 0.0f,  0.75f, -0.73f, 0.0f, 0,0,0.5, 0.4,0.4,0.4 },
+		{ 0.5f, 0.5f, 0.0f,   0.88f, 0.77f, 0.0f, 1,1,0,    0,1,1}
 	};
 
 	this->m_vb = GraphicsEngine::get()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(list);
 
-	GraphicsEngine::get()->createShaders();
 
 	void* shader_byte_code = nullptr;
-	UINT size_shader = 0;
-	GraphicsEngine::get()->getShaderBufferAndSize(&shader_byte_code, &size_shader);
+	size_t size_shader = 0;
+	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 
+	this->m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code,size_shader);
 	this->m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	GraphicsEngine::get()->releaseCompiledShader();
 
+	GraphicsEngine::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
+	this->m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
+	GraphicsEngine::get()->releaseCompiledShader();
 
+	constant cc;
+	cc.m_angle = 0;
+	m_cb = GraphicsEngine::get()->createConstantBuffer();
+	m_cb->load(&cc, sizeof(constant));
 }
 
 void AppWindow::onUpdate()
@@ -54,10 +73,29 @@ void AppWindow::onUpdate()
 
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::get()->getDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
-	GraphicsEngine::get()->setShaders();
+
+	unsigned long new_time = 0;
+	if (m_old_time)
+		new_time = ::GetTickCount() - m_old_time;
+	m_delta_time = new_time / 1000.0f;
+	m_old_time = ::GetTickCount();
+	m_angle += 1.57f * m_delta_time;
+	constant cc;
+	cc.m_angle = m_angle;
+
+	this->m_cb->update(GraphicsEngine::get()->getDeviceContext(), &cc);
+
+	GraphicsEngine::get()->getDeviceContext()->setConstantBuffer(this->m_vs, this->m_cb);
+	GraphicsEngine::get()->getDeviceContext()->setConstantBuffer(this->m_ps, this->m_cb);
+
+	GraphicsEngine::get()->getDeviceContext()->setVertexShader(this->m_vs);
+	GraphicsEngine::get()->getDeviceContext()->setPixelShader(this->m_ps);
+	
 
 	GraphicsEngine::get()->getDeviceContext()->setVertexBuffer(this->m_vb);
-	GraphicsEngine::get()->getDeviceContext()->drawTriangleList(this->m_vb->getSizeVertexList(), 0);
+	
+	//Rectangle:
+	GraphicsEngine::get()->getDeviceContext()->drawTriangleStrip(this->m_vb->getSizeVertexList(), 0);
 
 	m_swap_chain->present(true);
 }
@@ -67,6 +105,8 @@ void AppWindow::onDestroy()
 	Window::onDestroy();
 	this->m_vb->release();
 	this->m_swap_chain->release();
+	this->m_vs->release();
+	this->m_ps->release();
 	GraphicsEngine::get()->release();
 }
 

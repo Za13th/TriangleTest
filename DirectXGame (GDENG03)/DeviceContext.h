@@ -3,6 +3,9 @@
 
 class SwapChain;
 class VertexBuffer;
+class ConstantBuffer;
+class VertexShader;
+class PixelShader;
 
 class DeviceContext
 {
@@ -11,14 +14,22 @@ class DeviceContext
 		void clearRenderTargetColor(SwapChain* swap_chain, float red, float green, float blue, float alpha);
 		void setVertexBuffer(VertexBuffer* vertex_buffer);
 		void drawTriangleList(UINT vertex_count, UINT start_vertex_index);
-		void setViewportSize(UINT width, UINT height);
-		bool release();
+		void drawTriangleStrip(UINT vertex_count, UINT start_vertex_index);
 
-		void VSSetShader(ID3D11VertexShader* vs, ID3D11ClassInstance* class_instance, int zero);
-		void PSSetShader(ID3D11PixelShader* ps, ID3D11ClassInstance* class_instance, int zero);
+		void setViewportSize(UINT width, UINT height);
+
+		void setVertexShader(VertexShader* vertex_shader);
+		void setPixelShader(PixelShader* pixel_shader);
+
+		void setConstantBuffer(VertexShader* vertex_shader, ConstantBuffer* constant_buffer);
+		void setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer* constant_buffer);
+
+		bool release();
 		~DeviceContext();
 	private:
 		ID3D11DeviceContext* m_device_context;
+
+		friend class ConstantBuffer;
 
 
 };

@@ -1,6 +1,6 @@
 ﻿  AppWindow.cpp
-  DeviceContext.cpp
-  GraphicsEngine.cpp
-  main.cpp
-  Generating Code...
+C:\Users\Jayvee-PC\Desktop\School\C++\GDENG03\For Class\DirectXGame (GDENG03)\AppWindow.cpp(43,55): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Desktop\School\C++\GDENG03\For Class\DirectXGame (GDENG03)\AppWindow.cpp(43,59): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Desktop\School\C++\GDENG03\For Class\DirectXGame (GDENG03)\AppWindow.cpp(43,63): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Desktop\School\C++\GDENG03\For Class\DirectXGame (GDENG03)\AppWindow.cpp(56,70): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
   DirectXGame (GDENG03).vcxproj -> C:\Users\Jayvee-PC\Desktop\School\C++\GDENG03\For Class\DirectXGame (GDENG03)\x64\Debug\DirectXGame (GDENG03).exe
