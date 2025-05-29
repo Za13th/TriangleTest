@@ -31,6 +31,12 @@
     <Filter Include="GameEngine\GraphicsEngine\ConstantBuffer">
       <UniqueIdentifier>{683edee4-8b95-4822-bb4b-87b96708eb66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\MyClasses">
+      <UniqueIdentifier>{7d65a1f3-b3bc-4615-adba-4a4d2f7d79d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\MyClasses\Quad">
+      <UniqueIdentifier>{557e6a2d-806a-40db-8ba9-397e13a46fc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +69,9 @@
     <ClCompile Include="ConstantBuffer.cpp">
       <Filter>GameEngine\GraphicsEngine\ConstantBuffer</Filter>
     </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>GameEngine\GraphicsEngine\MyClasses\Quad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -91,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
       <Filter>GameEngine\GraphicsEngine\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>GameEngine\GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>GameEngine\GraphicsEngine\MyClasses\Quad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ class Window
 		bool broadcast();
 		//Release the Window
 		bool release();
-		bool isRun();
+		bool isRunning();
 
 		RECT getClientWindowRect();
 		void setHWND(HWND hwnd);

@@ -7,10 +7,35 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 
+GraphicsEngine* GraphicsEngine::sharedInstance = nullptr;
+
+GraphicsEngine* GraphicsEngine::getInstance()
+{
+	if (!sharedInstance)
+	{
+		sharedInstance = new GraphicsEngine();
+		sharedInstance->init();
+	}
+	return sharedInstance;
+}
+
+void GraphicsEngine::initialize()
+{
+	sharedInstance = new GraphicsEngine();
+	sharedInstance->init();
+}
+
+void GraphicsEngine::destroy()
+{
+	if (sharedInstance != NULL)
+		sharedInstance->release();
+}
+
 GraphicsEngine::GraphicsEngine()
 {
 
 }
+
 
 bool GraphicsEngine::init()
 {
@@ -160,6 +185,5 @@ void GraphicsEngine::releaseCompiledShader()
 
 GraphicsEngine * GraphicsEngine::get()
 {
-	static GraphicsEngine engine;
-	return &engine;
+	return getInstance();
 }

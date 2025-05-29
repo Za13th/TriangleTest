@@ -13,13 +13,17 @@ class PixelShader;
 class GraphicsEngine
 {
 	public:
-		GraphicsEngine();
+		static GraphicsEngine* getInstance();
+		static void initialize();
+		static void destroy();
+
+
 		//Initialize 
 		bool init();
 		//Releases used resources
 		bool release();
 
-		~GraphicsEngine();
+
 		SwapChain* createSwapChain();
 		DeviceContext* getDeviceContext();
 		VertexBuffer* createVertexBuffer();
@@ -34,6 +38,14 @@ class GraphicsEngine
 		static GraphicsEngine* get();
 
 	private:
+		GraphicsEngine();
+		~GraphicsEngine();
+		GraphicsEngine(const GraphicsEngine&) {};
+		GraphicsEngine& operator=(const GraphicsEngine&) {};
+		static GraphicsEngine* sharedInstance;
+
+
+
 		DeviceContext* m_imm_device_context;
 
 		ID3D11Device* m_d3d_device;
