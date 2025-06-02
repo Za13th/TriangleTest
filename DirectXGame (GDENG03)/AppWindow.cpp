@@ -2,11 +2,16 @@
 #include "structs.h"
 #include <Windows.h>
 #include <iostream>
+#include "Vector3D.h"
+#include "Matrix4x4.h"
 #include "Quad.h"
 
 __declspec(align(16))
 struct constant
 {
+	Matrix4x4 m_world;
+	Matrix4x4 m_view;
+	Matrix4x4 m_proj;
 	float m_angle;
 };
 
@@ -40,6 +45,60 @@ AppWindow::AppWindow()
 
 }
 
+void AppWindow::updateQuadPosition()
+{
+	unsigned long new_time = 0;
+	if (m_old_time)
+		new_time = ::GetTickCount() - m_old_time;
+	m_delta_time = new_time / 1000.0f;
+	m_old_time = ::GetTickCount();
+	m_angle += 1.57f * m_delta_time;
+	constant cc;
+	cc.m_angle = m_angle;
+
+
+	m_delta_pos += m_delta_time / 10.0f;
+	if (m_delta_pos > 1.0f) m_delta_pos = 0.0f;
+	
+
+	Matrix4x4 temp;
+
+	m_delta_scale += m_delta_time / 10.f;
+
+	//cc.m_world.setScale(Vector3D::lerp(Vector3D(0.5, 0.5, 0), Vector3D(1, 1, 0), (sin(m_delta_scale) + 1.0f)/2.0f));
+
+	//temp.setTranslation(Vector3D::lerp(Vector3D(-1.5, -1.5, 0), Vector3D(1.5, 1.5, 0), m_delta_pos));
+
+	//cc.m_world *= temp;
+
+	cc.m_world.setScale(Vector3D(1, 1, 1));
+
+
+
+			temp.setRotationZ(m_delta_scale);
+			cc.m_world *= temp;
+			temp.setRotationY(m_delta_scale);
+			cc.m_world *= temp;
+			temp.setRotationX(m_delta_scale);
+			cc.m_world *= temp;
+
+
+			cc.m_view.setIdentity();
+
+			RECT rc = this->getClientWindowRect();
+			int width = rc.right - rc.left;
+			int height = rc.bottom - rc.top;
+
+			cc.m_proj.setOrthoLH(width / 400.0f, height / 400.0f, -4.0f, 4.0f);
+
+			this->m_cb->update(GraphicsEngine::get()->getDeviceContext(), &cc);
+		
+
+
+	}
+
+
+
 void AppWindow::createGraphicsWindow()
 {
 	GraphicsEngine::initialize();
@@ -60,32 +119,46 @@ void AppWindow::createGraphicsWindow()
 	this->m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
 
 	//for drawing a quad
-	/*vertex list[] =
+	vertex vertex_list[] =
 	{//    X     Y     Z
 		//Rainbow
-     	{ -0.5f, -0.5f, 0.0f, -0.32f, -0.11f, 0.0f ,1,0,0,  1,0,1 },
-		{ -0.5f, 0.5f, 0.0f,  -0.11f, 0.78f, 0.0f, 0,1,0,   0.5,0.5,1 },
-		{ 0.5f, -0.5f, 0.0f,  0.75f, -0.73f, 0.0f, 0,0,0.5, 0.4,0.4,0.4 },
-		{ 0.5f, 0.5f, 0.0f,   0.88f, 0.77f, 0.0f, 1,1,0,    0,1,1}
+     	{ Vector3D(-0.5f, -0.5f, -0.5f) ,  Vector3D(1,0,0),  Vector3D(0.4)},
+		{ Vector3D(-0.5f, 0.5f, -0.5f) ,   Vector3D(0,1,0),   Vector3D(0.4) },
+		{ Vector3D(0.5f, 0.5f, -0.5f) , Vector3D(0,0,1), Vector3D(0.4) },
+		{ Vector3D(0.5f, -0.5f, -0.5f),  Vector3D(1,1,0),    Vector3D(0.4)},
+
+		{ Vector3D(0.5f, -0.5f, 0.5f) ,  Vector3D(0.2),  Vector3D(0.4) },
+		{ Vector3D(0.5f, 0.5f, 0.5f) ,   Vector3D(0,1,1),  Vector3D(0.4) },
+		{ Vector3D(-0.5f, 0.5f, 0.5f) , Vector3D(1,0,1), Vector3D(0.4) },
+		{ Vector3D(-0.5f, -0.5f, 0.5f),  Vector3D(0.1),    Vector3D(0.4)}
 	};
 
 	this->m_vb = GraphicsEngine::get()->createVertexBuffer();
-	UINT size_list = ARRAYSIZE(list);
+	UINT size_list = ARRAYSIZE(vertex_list);
 
-	this->m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
-	GraphicsEngine::get()->releaseCompiledShader();*/
-
-	quads.push_back(Quad(0.5f, 0.5f, { 0,0,0 }));
-	quads.push_back(Quad(0.3f, 0.5f, { 0.5,-0.5,0 }));
-	quads.push_back(Quad(0.2f, 0.4f, { 0.2,0.7,0 }));
-
-	quads[1].setColor({ 1.f,0.5,1.f });
-	quads[2].setColor({ 1.f,0.f,1.f }, {0.5,0.5,1.f},{ 0.3f,0.3f,0.3f},{ 0.f,1.f,1.f });
-
-	for (int i = 0; i < quads.size(); i++)
+	unsigned int index_list[] =
 	{
-		quads[i].Create(&shader_byte_code, &size_shader);
-	}
+		0, 1, 2,
+		2, 3, 0,
+		4, 5, 6,
+		6, 7, 4,
+		1, 6, 5,
+		5, 2, 1,
+		7, 0, 3,
+		3, 4, 7,
+		3, 2, 5,
+		5, 4, 3,
+		7, 6, 1,
+		1, 0, 7
+	};
+
+	this->m_ib = GraphicsEngine::get()->createIndexBuffer();
+	UINT size_index_list = ARRAYSIZE(index_list);
+
+	this->m_ib->load(index_list, size_index_list);
+
+	this->m_vb->load(vertex_list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	GraphicsEngine::get()->releaseCompiledShader();
 
 	GraphicsEngine::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
 	this->m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
@@ -105,21 +178,13 @@ void AppWindow::onCreate()
 void AppWindow::onUpdate()
 {
 	Window::onUpdate();                                                               //  R  G  B  A
-	GraphicsEngine::get()->getDeviceContext()->clearRenderTargetColor(this->m_swap_chain, 0, 0, 1, 1);
+	GraphicsEngine::get()->getDeviceContext()->clearRenderTargetColor(this->m_swap_chain, (float)(135.f/255.f), (float)(206.f /255.f), (float)(255.f /255.f), 1);
 
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::get()->getDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	unsigned long new_time = 0;
-	if (m_old_time)
-		new_time = ::GetTickCount() - m_old_time;
-	m_delta_time = new_time / 1000.0f;
-	m_old_time = ::GetTickCount();
-	m_angle += 1.57f * m_delta_time;
-	constant cc;
-	cc.m_angle = m_angle;
+	this->updateQuadPosition();
 
-	this->m_cb->update(GraphicsEngine::get()->getDeviceContext(), &cc);
 
 	GraphicsEngine::get()->getDeviceContext()->setConstantBuffer(this->m_vs, this->m_cb);
 	GraphicsEngine::get()->getDeviceContext()->setConstantBuffer(this->m_ps, this->m_cb);
@@ -128,18 +193,19 @@ void AppWindow::onUpdate()
 	GraphicsEngine::get()->getDeviceContext()->setPixelShader(this->m_ps);
 	
 
-	/*GraphicsEngine::get()->getDeviceContext()->setVertexBuffer(this->m_vb);
+	GraphicsEngine::get()->getDeviceContext()->setVertexBuffer(this->m_vb);
+	GraphicsEngine::get()->getDeviceContext()->setIndexBuffer(this->m_ib);
 	
 	//Rectangle:
-	GraphicsEngine::get()->getDeviceContext()->drawTriangleStrip(this->m_vb->getSizeVertexList(), 0);*/
-	
-	for (int i = 0; i < quads.size(); i++)
-	{
-		quads[i].Draw();
-	}
+	GraphicsEngine::get()->getDeviceContext()->drawIndexedTriangleList(this->m_ib->getSizeIndexList(), 0, 0);
 
 
 	m_swap_chain->present(true);
+
+	m_old_delta = m_new_delta;
+	m_new_delta = ::GetTickCount();
+
+	m_delta_time = (m_old_delta)?((m_new_delta - m_old_delta) / 1000.0f):0; // Calculate delta time
 }
 
 void AppWindow::onDestroy()
@@ -147,6 +213,8 @@ void AppWindow::onDestroy()
 	Window::onDestroy();
 	if(this->m_vb != nullptr) //vertex buffers are part of the quad class instead
 	this->m_vb->release();
+	this->m_ib->release();
+	this->m_cb->release();
 	this->m_swap_chain->release();
 	this->m_vs->release();
 	this->m_ps->release();

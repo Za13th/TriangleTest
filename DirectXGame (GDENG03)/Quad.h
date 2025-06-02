@@ -3,16 +3,17 @@
 #include "structs.h"
 
 class VertexBuffer;
+
 class Quad
 {
 	public:
 		Quad();
-		Quad(float width, float height, vec3 center);
+		Quad(float width, float height, Vector3D center);
 		
 
 		void Create(void** shader_byte_code, size_t* size_shader);
-		void setColor(vec3 color);
-		void setColor(vec3 color1, vec3 color2, vec3 color3, vec3 color4);
+		void setColor(Vector3D color);
+		void setColor(Vector3D color1, Vector3D color2, Vector3D color3, Vector3D color4);
 		void Draw();
 		void Release();
 

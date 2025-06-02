@@ -5,20 +5,20 @@
 
 Quad::Quad()
 {   //default rainbow quad but smaller
-	this->vertexes[0] = { -0.1f, -0.1f, 0.0f, -0.32f, -0.11f, 0.0f ,1,0,0,  1,0,1 };
-	this->vertexes[1] = { -0.1f, 0.1f, 0.0f,  -0.11f, 0.78f, 0.0f, 0,1,0,   0.5,0.5,1 };
-	this->vertexes[2] = { 0.1f, -0.1f, 0.0f,  0.75f, -0.73f, 0.0f, 0,0,0.5, 0.4,0.4,0.4 };
-	this->vertexes[3] = { 0.1f, 0.1f, 0.0f,   0.88f, 0.77f, 0.0f, 1,1,0,    0,1,1 };
+	this->vertexes[0] = { Vector3D(-0.1f, -0.1f, 0.0f) ,Vector3D(1,0,0),  Vector3D(1,0,1)};
+	this->vertexes[1] = { Vector3D(-0.1f, 0.1f, 0.0f),   Vector3D(0,1,0),   Vector3D(0.5,0.5,1)};
+	this->vertexes[2] = { Vector3D(0.1f, -0.1f, 0.0f),   Vector3D(0,0,0.5), Vector3D(0.4,0.4,0.4) };
+	this->vertexes[3] = { Vector3D(0.1f, 0.1f, 0.0f),    Vector3D(1,1,0),    Vector3D(0,1,1) };
 
 	this->size_vertexes = ARRAYSIZE(vertexes);
 }
 
-Quad::Quad(float width, float height, vec3 center)
+Quad::Quad(float width, float height, Vector3D center)
 {
-	this->vertexes[0] = { center.x - width / 2, center.y - height / 2, center.z, -0.32f, -0.11f, 0.0f ,1,0,0,  1,0,1 };
-	this->vertexes[1] = { center.x - width / 2, center.y + height / 2, center.z,  -0.11f, 0.78f, 0.0f, 0,1,0,   0.5,0.5,1 };
-	this->vertexes[2] = { center.x + width / 2, center.y - height / 2, center.z,  0.75f, -0.73f, 0.0f, 0,0,0.5, 0.4,0.4,0.4 };
-	this->vertexes[3] = { center.x + width / 2, center.y + height / 2, center.z,   0.88f, 0.77f, 0.0f, 1,1,0,    0,1,1 };
+	this->vertexes[0] = { Vector3D(center.x - width / 2, center.y - height / 2, center.z), Vector3D(1,0,0),  Vector3D(1,0,1) };
+	this->vertexes[1] = { Vector3D(center.x - width / 2, center.y + height / 2, center.z),   Vector3D(0,1,0),   Vector3D(0.5,0.5,1) };
+	this->vertexes[2] = { Vector3D(center.x + width / 2, center.y - height / 2, center.z),  Vector3D(0,0,0.5), Vector3D(0.4,0.4,0.4) };
+	this->vertexes[3] = { Vector3D(center.x + width / 2, center.y + height / 2, center.z),   Vector3D(1,1,0),    Vector3D(0,1,1) };
 
 	this->size_vertexes = ARRAYSIZE(vertexes);
 }
@@ -30,7 +30,7 @@ void Quad::Create(void** shader_byte_code, size_t* size_shader)
 	m_vbuffer->load(this->vertexes, sizeof(vertex), this->size_vertexes, *shader_byte_code, *size_shader);
 }
 
-void Quad::setColor(vec3 color)
+void Quad::setColor(Vector3D color)
 {
 	this->vertexes[0].color = color;
 	this->vertexes[1].color = color;
@@ -38,7 +38,7 @@ void Quad::setColor(vec3 color)
 	this->vertexes[3].color = color;
 }
 
-void Quad::setColor(vec3 color1, vec3 color2, vec3 color3, vec3 color4)
+void Quad::setColor(Vector3D color1, Vector3D color2, Vector3D color3, Vector3D color4)
 {
 	this->vertexes[0].color = color1;
 	this->vertexes[1].color = color2;

@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "DirectXG.1c9c3de6\\x64\\Debug\\Camera.h.obj",
+            "outputs": [
+                "C:\\Users\\Jayvee-PC\\Documents\\GitHub\\TriangleTest\\DirectXGame (GDENG03)\\DirectXG.1c9c3de6\\x64\\Debug\\vc143.pdb",
+                "DirectXG.1c9c3de6\\x64\\Debug\\",
+                "C:\\Users\\Jayvee-PC\\Documents\\GitHub\\TriangleTest\\DirectXGame (GDENG03)\\DirectXG.1c9c3de6\\x64\\Debug\\Camera.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "Camera.h",
+                    "source-path": "c:\\users\\jayvee-pc\\documents\\github\\triangletest\\directxgame (gdeng03)\\camera.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

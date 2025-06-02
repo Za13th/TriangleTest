@@ -19,9 +19,6 @@
     <Filter Include="GameEngine\GraphicsEngine\DeviceContext">
       <UniqueIdentifier>{7ac2c2cd-6a2e-4232-8186-05f0c945ad23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\GraphicsEngine\VertextBuffer">
-      <UniqueIdentifier>{571846c8-c382-443e-84da-51e1da18ea24}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\GraphicsEngine\VertexShader">
       <UniqueIdentifier>{e73d8a7c-1064-45fd-ad06-fd7f52d82bf1}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,15 @@
     </Filter>
     <Filter Include="GameEngine\GraphicsEngine\MyClasses\Quad">
       <UniqueIdentifier>{557e6a2d-806a-40db-8ba9-397e13a46fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Math">
+      <UniqueIdentifier>{ee6c9914-f052-42c5-98df-6b84551fda39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\IndexBuffer">
+      <UniqueIdentifier>{62ce9c2d-af65-4cdd-b067-f12f45e0ff5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\VertexBuffer">
+      <UniqueIdentifier>{571846c8-c382-443e-84da-51e1da18ea24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +64,7 @@
       <Filter>GameEngine\GraphicsEngine\DeviceContext</Filter>
     </ClCompile>
     <ClCompile Include="VertexBuffer.cpp">
-      <Filter>GameEngine\GraphicsEngine\VertextBuffer</Filter>
+      <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
     </ClCompile>
     <ClCompile Include="VertexShader.cpp">
       <Filter>GameEngine\GraphicsEngine\VertexShader</Filter>
@@ -71,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="Quad.cpp">
       <Filter>GameEngine\GraphicsEngine\MyClasses\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>GameEngine\GraphicsEngine\IndexBuffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,7 +99,7 @@
       <Filter>GameEngine\GraphicsEngine\DeviceContext</Filter>
     </ClInclude>
     <ClInclude Include="VertexBuffer.h">
-      <Filter>GameEngine\GraphicsEngine\VertextBuffer</Filter>
+      <Filter>GameEngine\GraphicsEngine\VertexBuffer</Filter>
     </ClInclude>
     <ClInclude Include="VertexShader.h">
       <Filter>GameEngine\GraphicsEngine\VertexShader</Filter>
@@ -106,6 +115,15 @@
     </ClInclude>
     <ClInclude Include="Quad.h">
       <Filter>GameEngine\GraphicsEngine\MyClasses\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4x4.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>GameEngine\GraphicsEngine\IndexBuffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

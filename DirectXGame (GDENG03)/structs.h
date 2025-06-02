@@ -1,14 +1,8 @@
 #pragma once
-
-struct vec3
-{
-	float x, y, z;
-};
-
+#include "Vector3D.h"
 struct vertex
 {
-	vec3 position;
-	vec3 position1;
-	vec3 color;
-	vec3 color1;
+	Vector3D position;
+	Vector3D color;
+	Vector3D color1;
 };

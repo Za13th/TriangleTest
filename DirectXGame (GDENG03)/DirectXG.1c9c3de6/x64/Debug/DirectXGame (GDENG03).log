@@ -1,4 +1,14 @@
 ﻿  AppWindow.cpp
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(80,37): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(80,41): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(125,69): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(126,66): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(127,61): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(128,65): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(130,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(130,61): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(131,63): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(132,61): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(133,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(133,63): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(160,77): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(206,30): warning C4244: '=': conversion from 'DWORD' to 'float', possible loss of data
   DirectXGame (GDENG03).vcxproj -> C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\x64\Debug\DirectXGame (GDENG03).exe
