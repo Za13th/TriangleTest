@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <DirectXMath.h>
 #include "Vector3D.h"
 
 class Matrix4x4
@@ -82,6 +83,19 @@ class Matrix4x4
 			m[1][1] = 2.0f / height;
 			m[2][2] = 1.0f / (far_plane - near_plane);
 			m[3][2] = -(near_plane / (far_plane - near_plane));
+		}
+
+		DirectX::XMMATRIX getInverse()
+		{
+			auto D11Matrix = DirectX::XMMATRIX(
+				m[0][0], m[0][1], m[0][2], m[0][3],
+				m[1][0], m[1][1], m[1][2], m[1][3],
+				m[2][0], m[2][1], m[2][2], m[2][3],
+				m[3][0], m[3][1], m[3][2], m[3][3]
+			);
+			auto D11Inverse = DirectX::XMMatrixInverse(nullptr, D11Matrix);
+
+			return D11Inverse;
 		}
 
 };

@@ -52,5 +52,6 @@ class AppWindow : public Window
 		float m_angle = 0;
 
 		std::vector<Quad> quads;
+		ConstantBuffer* m_cb_light;
 };
 

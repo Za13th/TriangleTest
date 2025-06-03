@@ -1,14 +1,17 @@
 ﻿  AppWindow.cpp
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(125,69): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(126,66): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(127,61): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(128,65): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(130,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(130,61): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(131,63): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(132,61): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(133,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(133,63): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(160,77): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(206,30): warning C4244: '=': conversion from 'DWORD' to 'float', possible loss of data
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\DirectionalLight.h(5,7): warning C4099: 'DirectionalLight': type name first seen using 'struct' now seen using 'class'
+  (compiling source file 'AppWindow.cpp')
+      C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\DirectionalLight.h(5,7):
+      see declaration of 'DirectionalLight'
+  
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(135,104): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(136,102): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(137,80): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(138,100): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(140,81): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(141,98): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(142,97): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(143,101): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(170,77): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\AppWindow.cpp(224,30): warning C4244: '=': conversion from 'DWORD' to 'float', possible loss of data
   DirectXGame (GDENG03).vcxproj -> C:\Users\Jayvee-PC\Documents\GitHub\TriangleTest\DirectXGame (GDENG03)\x64\Debug\DirectXGame (GDENG03).exe

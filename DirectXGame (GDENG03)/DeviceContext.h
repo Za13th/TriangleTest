@@ -7,6 +7,7 @@ class IndexBuffer;
 class ConstantBuffer;
 class VertexShader;
 class PixelShader;
+struct DirectionalLight;
 
 class DeviceContext
 {
@@ -26,6 +27,7 @@ class DeviceContext
 
 		void setConstantBuffer(VertexShader* vertex_shader, ConstantBuffer* constant_buffer);
 		void setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer* constant_buffer);
+		void setLightBuffer( ConstantBuffer* constant_buffer);
 
 		bool release();
 		~DeviceContext();

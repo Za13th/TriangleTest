@@ -146,13 +146,16 @@
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="Quad.h" />
+    <ClInclude Include="SpotLight.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexShader.h" />

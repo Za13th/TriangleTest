@@ -5,6 +5,7 @@
 #include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
+#include "DirectionalLight.h"
 
 
 DeviceContext::DeviceContext(ID3D11DeviceContext* device_context)
@@ -78,6 +79,11 @@ void DeviceContext::setConstantBuffer(VertexShader* vertex_shader, ConstantBuffe
 void DeviceContext::setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer* constant_buffer)
 {
 	this->m_device_context->PSSetConstantBuffers(0, 1, &constant_buffer->m_buffer);
+}
+
+void DeviceContext::setLightBuffer(ConstantBuffer* constant_buffer)
+{
+	this->m_device_context->PSSetConstantBuffers(1, 1, &constant_buffer->m_buffer);
 }
 
 bool DeviceContext::release()

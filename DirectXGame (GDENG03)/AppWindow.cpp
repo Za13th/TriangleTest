@@ -5,6 +5,7 @@
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 #include "Quad.h"
+#include "DirectionalLight.h"
 
 __declspec(align(16))
 struct constant
@@ -12,6 +13,7 @@ struct constant
 	Matrix4x4 m_world;
 	Matrix4x4 m_view;
 	Matrix4x4 m_proj;
+	DirectX::XMMATRIX m_proj_inv;
 	float m_angle;
 };
 
@@ -91,7 +93,15 @@ void AppWindow::updateQuadPosition()
 
 			cc.m_proj.setOrthoLH(width / 400.0f, height / 400.0f, -4.0f, 4.0f);
 
+
+
+			cc.m_proj_inv = cc.m_proj.getInverse();
+
 			this->m_cb->update(GraphicsEngine::get()->getDeviceContext(), &cc);
+
+			DirectionalLight d_light;
+			d_light.direction = { 0, 100, 0, 1.0f };
+			this->m_cb_light->update(GraphicsEngine::get()->getDeviceContext(), &d_light);
 		
 
 
@@ -122,15 +132,15 @@ void AppWindow::createGraphicsWindow()
 	vertex vertex_list[] =
 	{//    X     Y     Z
 		//Rainbow
-     	{ Vector3D(-0.5f, -0.5f, -0.5f) ,  Vector3D(1,0,0),  Vector3D(0.4)},
-		{ Vector3D(-0.5f, 0.5f, -0.5f) ,   Vector3D(0,1,0),   Vector3D(0.4) },
-		{ Vector3D(0.5f, 0.5f, -0.5f) , Vector3D(0,0,1), Vector3D(0.4) },
-		{ Vector3D(0.5f, -0.5f, -0.5f),  Vector3D(1,1,0),    Vector3D(0.4)},
+     	{ Vector3D(-0.5f, -0.5f, -0.5f) ,Vector3D(-0.577f, -0.577f, -0.577f) , Vector3D(0.1f),  Vector3D(0.4)},
+		{ Vector3D(-0.5f, 0.5f, -0.5f) , Vector3D(-0.577f,  0.577f, -0.577f) ,  Vector3D(0.2f),   Vector3D(0.4) },
+		{ Vector3D(0.5f, 0.5f, -0.5f) , Vector3D(0.577f,  0.577f, -0.577f), Vector3D(0.4) },
+		{ Vector3D(0.5f, -0.5f, -0.5f),  Vector3D(0.577f, -0.577f, -0.577f) ,Vector3D(0.4f),    Vector3D(0.4)},
 
-		{ Vector3D(0.5f, -0.5f, 0.5f) ,  Vector3D(0.2),  Vector3D(0.4) },
-		{ Vector3D(0.5f, 0.5f, 0.5f) ,   Vector3D(0,1,1),  Vector3D(0.4) },
-		{ Vector3D(-0.5f, 0.5f, 0.5f) , Vector3D(1,0,1), Vector3D(0.4) },
-		{ Vector3D(-0.5f, -0.5f, 0.5f),  Vector3D(0.1),    Vector3D(0.4)}
+		{ Vector3D(0.5f, -0.5f, 0.5f) , Vector3D(0.577f, -0.577f,  0.577f),  Vector3D(0.4) },
+		{ Vector3D(0.5f, 0.5f, 0.5f) ,  Vector3D(0.577f,  0.577f,  0.577f) , Vector3D(0.6f),  Vector3D(0.4) },
+		{ Vector3D(-0.5f, 0.5f, 0.5f) , Vector3D(-0.577f,  0.577f,  0.577f) ,Vector3D(0.7f), Vector3D(0.4) },
+		{ Vector3D(-0.5f, -0.5f, 0.5f),  Vector3D(-0.577f, -0.577f,  0.577f) ,Vector3D(0.8f),    Vector3D(0.4)}
 	};
 
 	this->m_vb = GraphicsEngine::get()->createVertexBuffer();
@@ -168,6 +178,12 @@ void AppWindow::createGraphicsWindow()
 	cc.m_angle = 0;
 	m_cb = GraphicsEngine::get()->createConstantBuffer();
 	m_cb->load(&cc, sizeof(constant));
+
+	DirectionalLight d_light;
+	d_light.direction = { 0, 100, 0, 1.0f };
+	this->m_cb_light = GraphicsEngine::get()->createConstantBuffer();
+	this->m_cb_light->load(&d_light, sizeof(DirectionalLight));
+
 }
 
 void AppWindow::onCreate()
@@ -189,7 +205,9 @@ void AppWindow::onUpdate()
 	GraphicsEngine::get()->getDeviceContext()->setConstantBuffer(this->m_vs, this->m_cb);
 	GraphicsEngine::get()->getDeviceContext()->setConstantBuffer(this->m_ps, this->m_cb);
 
+	GraphicsEngine::get()->getDeviceContext()->setLightBuffer(this->m_cb_light);
 	GraphicsEngine::get()->getDeviceContext()->setVertexShader(this->m_vs);
+
 	GraphicsEngine::get()->getDeviceContext()->setPixelShader(this->m_ps);
 	
 
